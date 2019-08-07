@@ -1,70 +1,41 @@
 echo(version=version());
-include <screw.scad>
 
-// thread(d,loopn,pitch,th,tw,minw,sw);
-// d:ネジの直径。
-// 雌ねじの場合は外側の直径、雄ねじの場合は内側の直径
-// loopn:ネジ山数
-// pitch:ネジピッチ
-// th:ネジ山高さ
-// tw:ネジ山幅
-// minw:構成要素の最小幅
-// これが小さいと変換に時間が掛かる。
-// sw:
-// 「０」または省略だと雌ねじ、「１」だと雄ねじ
-// ネジの向きを変える場合は「mirror」を使って反転させる。「rotate」では反転しない
+include <threads.scad>
 
-*thread(24,35,1.8,2,0,1,0);
-*thread(24,35,1.8,2,0,1,1);
-
-// Base Config
+// Base Config for staple_base
 base_W = 60;
 base_H = 80;
 base_T = 0.5;
 default_T = 2.0;
 default_S = 12;
-$fn = 60;
+$fn = 80;
 
-
-*staple_base(base_T,base_W,base_H,default_S,default_T);
-
-helicoid(20,60,2,30,2);
-
-// hRadius : radius of the stock cylinder
-// hLength : length of the stock cylinder
-// hTwist  : amount of twist (in degrees)
-// hN      : number of sectors
-// hGap    : size of clearance gap for sliding surfaces
-module helicoid(hRadius,hLength,hTwist,hN,hGap)
-{
- hSlices=10*hLength;
- linear_extrude(height=hLength,twist = hTwist,center=true,slices=hSlices)
- projection(cut=true)
- {
-  for(i=[1:hN])
-  {
-   rotate(a=[0,0,(360*i)/hN])
-    translate([-hGap,-hGap/2,-1])
-     cube([hRadius+hGap,hGap,2]);
-  }
- }
+// for Nezi
+translate([25, 110, 0]){
+    translate([0, 0, 8]) metric_thread (diameter=33, pitch=8, length=60);
+    difference(){
+        cylinder(h=8, r=25);
+        translate([0, 26, -1])cylinder(h=10, r=6);
+        translate([0, -26, -1])cylinder(h=10, r=6);
+        translate([26, 0, -1])cylinder(h=10, r=6);
+        translate([-26, 0, -1])cylinder(h=10, r=6);
+        translate([-18, 18, -1])cylinder(h=10, r=6);
+        translate([18, -18, -1])cylinder(h=10, r=6);
+        translate([18, 18, -1])cylinder(h=10, r=6);
+        translate([-18, -18, -1])cylinder(h=10, r=6);
+    }
 }
 
-
-* difference() {
-    translate([30, 35, 0]) cylinder(h = 25, r = 15);
-    translate([30, 35, 10]) cylinder(h = 22, r = 13);
-    translate([30, 35, 10]) thread(24,35,1.8,2,0,1,1);
+// for holder main pole
+translate([30, 40, 2]){
+    difference() {
+        cylinder(h=60, r=20);
+        translate([0, 0, -10])metric_thread (diameter=34, pitch=8, length=80, internal=true);
+        translate([0, 0, 55]) cylinder(h=10, r=17);
+    }
 }
 
-* cylinder(h = 42, r = 10);
-* thread(24,24,1.8,2,0,1,0);
-
-*difference() {
-    translate([30, 30, 0]) cylinder(h = 60, r = 17);
-    translate([30, 30, 0]) cylinder(h = 60, r = 15.2);
-}
-*translate([30, 30, 60]) cylinder(h = 10, r = 25);
+staple_base(base_T,base_W,base_H,default_S,default_T);
 
 module stapler_area(bt,bw,ds,dt) {
     hull() {

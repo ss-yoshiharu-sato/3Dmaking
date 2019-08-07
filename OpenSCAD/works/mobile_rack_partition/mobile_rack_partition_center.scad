@@ -1,7 +1,7 @@
 echo(version=version());
 
 // main
-translate([0, 2.5, 0]) {
+translate([-1, 2.5, 0]) {
     translate([2.5, 1.5, 2]) cube([6.5, 2, 30]);
     translate([11, 1.5, 2]) cube([6.5, 2, 30]);
 
