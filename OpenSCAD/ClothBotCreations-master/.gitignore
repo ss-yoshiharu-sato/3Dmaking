@@ -1,0 +1,6 @@
+*.gcode
+*.stl
+
+*.bak
+*.bck
+*.kicad_pcb-bak
