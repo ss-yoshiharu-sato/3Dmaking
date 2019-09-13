@@ -15,12 +15,34 @@ pitchN=4;
 interR=9;
 bladehuckR=0;
 
-* difference(){
-    import("2020 alu section.STL", convexity=3);
-    translate([-5, -5, 10]) cube([30, 30, 500]);
+difference(){
+    hull() {
+        union() {
+            difference(){
+                import("2020 alu section.STL", convexity=3);
+                translate([-5, -5, 10]) cube([30, 30, 500]);
+            }
+            translate([2, 0, 0]) cube([16,20,10]);
+            translate([0, 2, 0]) cube([20,16,10]);
+        }
+        translate([2, 2, 12]) cube([16, 16, 0.1]);
+    }
+    // scale([1, 1, 0.02]) import("2020 alu section.STL", convexity=3);
+    union() {
+        subdiff();
+        translate([20, 20, 0]) rotate([0, 0, 180]) subdiff();
+        translate([20, 0, 0]) rotate([0, 0, 90]) subdiff();
+        translate([0, 20, 0]) rotate([0, 0, 270]) subdiff();
+        translate([5.9, 5.9, 0]) cube([8.2, 8.2, 6]);
+    }
 }
 
-difference(){
+hull() {
+    translate([10, 10, 0]) rotate([0, 0, 0]) cylinder(h=0.1, r=2.4, center=false);
+    translate([10, 10, 5]) rotate([0, 0, 0]) cylinder(h=2, r=2.6, center=false);
+}
+
+* difference(){
     union() {
         translate([7, 0, 0]) cube([6, 3, 30]);
         hull() {
@@ -127,5 +149,13 @@ translate([2, 2, 2]) {
 
 
 
+}
+
+
+module subdiff() {
+    translate([0, 0, 0]) rotate([0, 0, 0]) cube([2, 7, 6]);
+    translate([0, 2, 0]) rotate([0, 0, 270]) cube([2, 7, 6]);
+    translate([1.8, 1.8, 0]) rotate([0, 0, 0]) cube([3, 3, 6]);
+    translate([1, 2.4, 0]) rotate([0, 0, -45]) cube([2, 7, 6]);
 }
 
