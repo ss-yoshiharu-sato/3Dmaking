@@ -1,9 +1,9 @@
 echo(version=version());
 $fn=60;
-baseW = 30;
+baseW = 110;
 baseH = 10;
 poleW = 20;
-poleH = 20;
+poleH = 110;
 daboR = ((poleW/2)-2)/2;
 daboA = daboR/10;
 daboH = daboR*1.5;
@@ -11,16 +11,31 @@ daboAjst = 0.4;
 daboSP = (poleW - (daboR*4))/2;
 daboMV = daboAjst+(daboR*2)+daboSP;
 daboHsub = 1;
-
+daboSetMV = baseW - poleW + daboAjst;
 
 union() {
 	cube([baseW, baseW, baseH]);
-	dabo();
+	translate([0, 0, 0]) dabo();
+	translate([daboSetMV, 0, 0]) dabo();
+	translate([0, daboSetMV, 0]) dabo();
+	translate([daboSetMV, daboSetMV, 0]) dabo();
 }
 
-*difference() {
+difference() {
 	translate([0, 0, baseH]) cube([poleW, poleW, poleH]);
 	dabo_ana();
+}
+hull() {
+	translate([0, 0, baseH+poleH]) cube([poleW, poleW, 0.1]);
+	translate([daboHsub, daboHsub, baseH+poleH+daboHsub]) cube([poleW-(daboHsub*2), poleW-(daboHsub*2), 0.1]);
+}
+
+
+*union() {
+	translate([0, 0, baseH]) cube([poleW, poleW, poleH]);
+	translate([0, baseW - poleW, baseH]) cube([poleW, poleW, poleH]);
+	translate([baseW - poleW, 0, baseH]) cube([poleW, poleW, poleH]);
+	translate([baseW - poleW, baseW - poleW, baseH]) cube([poleW, poleW, poleH]);
 }
 
 module dabo(){
