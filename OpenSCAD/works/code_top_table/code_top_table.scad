@@ -7,29 +7,40 @@ poleH = 110;
 daboR = ((poleW/2)-2)/2;
 daboA = daboR/10;
 daboH = daboR*1.5;
-daboAjst = 0.4;
+daboAjstDef = 0.5;
+daboAjst = 0.2;
 daboSP = (poleW - (daboR*4))/2;
 daboMV = daboAjst+(daboR*2)+daboSP;
 daboHsub = 1;
 daboSetMV = baseW - poleW + daboAjst;
 
+*rotate([90, 90, 0]) cylinder(h=110, r=3, $fn=3);
+
+
 union() {
-	cube([baseW, baseW, baseH]);
+	translate([-2, -2, 4]) cube([110, 2, 2]);
+	translate([0, -2, 4]) rotate([0, 0, 90]) cube([110, 2, 2]);
+	difference() {
+		cube([baseW, baseW, baseH]);
+		translate([0, 108, 3.9]) cube([110, 2, 2.2]);
+		translate([110, 0, 3.9]) rotate([0, 0, 90]) cube([110, 2, 2.2]);
+	}
 	translate([0, 0, 0]) dabo();
 	translate([daboSetMV, 0, 0]) dabo();
 	translate([0, daboSetMV, 0]) dabo();
 	translate([daboSetMV, daboSetMV, 0]) dabo();
 }
 
-difference() {
-	translate([0, 0, baseH]) cube([poleW, poleW, poleH]);
-	dabo_ana();
+*union() {
+	difference() {
+		translate([0, 0, baseH]) cube([poleW, poleW, poleH]);
+		dabo_ana();
+	}
+	hull() {
+		translate([0, 0, baseH+poleH]) cube([poleW, poleW, 0.1]);
+		translate([daboHsub, daboHsub, baseH+poleH+daboHsub]) cube([poleW-(daboHsub*2), poleW-(daboHsub*2), 0.1]);
+	}
 }
-hull() {
-	translate([0, 0, baseH+poleH]) cube([poleW, poleW, 0.1]);
-	translate([daboHsub, daboHsub, baseH+poleH+daboHsub]) cube([poleW-(daboHsub*2), poleW-(daboHsub*2), 0.1]);
-}
-
 
 *union() {
 	translate([0, 0, baseH]) cube([poleW, poleW, poleH]);
@@ -39,7 +50,7 @@ hull() {
 }
 
 module dabo(){
-	translate([daboR+daboAjst, daboR+daboAjst, 0]){
+	translate([daboR+daboAjst+daboAjstDef, daboR+daboAjst+daboAjstDef, 0]){
 		translate([daboAjst, daboAjst, baseH]) cylinder(h=daboH, r=daboR-daboAjst);
 		hull(){
 			translate([daboAjst, daboAjst, baseH+daboH]) cylinder(h=0.1, r=daboR-daboAjst);
@@ -64,7 +75,7 @@ module dabo(){
 }
 
 module dabo_ana(){
-	translate([daboR+daboAjst, daboR+daboAjst, 0]){
+	translate([daboR+daboAjst+daboAjstDef, daboR+daboAjst+daboAjstDef, 0]){
 		translate([daboAjst, daboAjst, baseH]) cylinder(h=daboH, r=daboR);
 		hull(){
 			translate([daboAjst, daboAjst, baseH+daboH]) cylinder(h=0.1, r=daboR);
