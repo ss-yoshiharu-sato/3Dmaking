@@ -1,18 +1,28 @@
 echo(version=version());
 // Base Config
-base_W = 6;
+base_W = 40;
 base_H = 53;
 // fix num
-base_T = 2.5;
+base_T = 3;
 baee_R = 12;
 $fn = 60;
 
-translate([0, 0, 0]) cube([30, 60, 3]);
-translate([0, 0, 0]) cube([3, 60, 18]);
-translate([27, 0, 0]) cube([3, 60, 56]);
-translate([27, 0, 53]) cube([46, 60, 3]);
-translate([70, 0, 0]) cube([3, 60, 106]);
-translate([70, 0, 103]) cube([46, 60, 3]);
+translate([0, 0, 0]) cube([24 + base_T + base_T, base_W, base_T]);
+translate([0, 0, 0]) cube([base_T, base_W, 15 + base_T]);
+translate([24 + base_T, 0, 0]) cube([base_T, base_W, 50 + base_T + base_T]);
+translate([24 + base_T, 0, 53]) cube([40 + base_T + base_T, base_W, base_T]);
+translate([70, 0, 0]) cube([base_T, base_W, 50 + base_T + base_T]);
+
+// translate([60, 5, 10]) cube([7 + base_T + base_T, 10, 2]);
+// translate([60, 25, 10]) cube([7 + base_T + base_T, 10, 2]);
+translate([0, -10, 0]) union(){
+	translate([70, 0, 40 + base_T]) cube([base_T, 60, 60 + base_T]);
+	translate([70, 0, 100 + base_T]) cube([40 + base_T + base_T, 60, base_T]);
+	translate([113, 0, 40 + base_T]) cube([base_T, 20, 60 + base_T]);
+	translate([113, 40, 40 + base_T]) cube([base_T, 20, 60 + base_T]);
+	translate([70, 0, 40 + base_T]) cube([40 + base_T + base_T, base_T, 20]);
+	translate([70, 60 - base_T, 40 + base_T]) cube([40 + base_T + base_T, base_T, 20]);
+}
 
 
 // // main hock body
