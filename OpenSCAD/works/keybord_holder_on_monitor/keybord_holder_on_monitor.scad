@@ -7,6 +7,10 @@ base_T = 3;
 baee_R = 12;
 $fn = 60;
 
+box_W = 70;
+box_H = 40;
+box_A = -((box_W - base_W) / 2);
+
 translate([0, 0, 0]) cube([24 + base_T + base_T, base_W, base_T]);
 translate([0, 0, 0]) cube([base_T, base_W, 15 + base_T]);
 translate([24 + base_T, 0, 0]) cube([base_T, base_W, 50 + base_T + base_T]);
@@ -15,13 +19,13 @@ translate([70, 0, 0]) cube([base_T, base_W, 50 + base_T + base_T]);
 
 // translate([60, 5, 10]) cube([7 + base_T + base_T, 10, 2]);
 // translate([60, 25, 10]) cube([7 + base_T + base_T, 10, 2]);
-translate([0, -10, 0]) union(){
-	translate([70, 0, 40 + base_T]) cube([base_T, 60, 60 + base_T]);
-	translate([70, 0, 100 + base_T]) cube([40 + base_T + base_T, 60, base_T]);
-	translate([113, 0, 40 + base_T]) cube([base_T, 20, 60 + base_T]);
-	translate([113, 40, 40 + base_T]) cube([base_T, 20, 60 + base_T]);
-	translate([70, 0, 40 + base_T]) cube([40 + base_T + base_T, base_T, 20]);
-	translate([70, 60 - base_T, 40 + base_T]) cube([40 + base_T + base_T, base_T, 20]);
+translate([0, box_A, 0]) union(){
+	translate([70, 0, 40 + base_T]) cube([base_T, box_W, 60 + base_T]);
+	translate([70, 0, 100 + base_T]) cube([box_H + base_T + base_T, box_W, base_T]);
+	translate([box_H + 70 + base_T, 0, 40 + base_T]) cube([base_T, box_W / 3, 60 + base_T]);
+	translate([box_H + 70 + base_T, (box_W / 3) * 2, 40 + base_T]) cube([base_T, box_W / 3, 60 + base_T]);
+	translate([70, 0, 40 + base_T]) cube([box_H + base_T + base_T, base_T, 20]);
+	translate([70, box_W - base_T, 40 + base_T]) cube([box_H + base_T + base_T, base_T, 20]);
 }
 
 
