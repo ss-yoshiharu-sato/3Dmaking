@@ -7,8 +7,8 @@ base_T = 3;
 baee_R = 12;
 $fn = 60;
 
-box_W = 70;
-box_H = 40;
+box_W = 76;
+box_H = 45;
 box_A = -((box_W - base_W) / 2);
 
 translate([0, 0, 0]) cube([24 + base_T + base_T, base_W, base_T]);
