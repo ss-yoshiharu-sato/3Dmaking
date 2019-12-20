@@ -8,7 +8,7 @@ baseW = 60;
 sepH = 30;
 sepM = 20;
 
-difference() {
+*difference() {
 	union(){
 		// base
 		cube([baseL,baseW,baseH]);
@@ -19,10 +19,11 @@ difference() {
 		}
 	}
 	defcyl();
-	translate([baseL, baseW/3 + 0.5, 0]) cube([baseH,baseW/3 - 1,sepH]);
+	translate([baseL, baseW/3 - 0.2, 0]) cube([baseH,baseW/3+0.4 ,sepH]);
 }
 
-*difference() {
+// translate([10, 0, 0]) 
+difference() {
 	union(){
 		// base2
 		translate([baseL, 0, 0]) cube([baseL2,baseW,baseH]);
