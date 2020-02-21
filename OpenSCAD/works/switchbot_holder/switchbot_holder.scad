@@ -13,25 +13,33 @@ minkowski_R = 2;
 
 difference() {
     hull(){
-        translate([0, 0, 0]) cube([32, 77, 0.1]);
-        translate([1, 1, 3]) cube([30, 75, 0.1]);
+        translate([0, 0, 0]) cube([68, 68, 0.1]);
+        translate([1, 1, 3]) cube([66, 66, 0.1]);
     }
     hull(){
-        translate([2, 10.5, 0.5]) cube([28, 14, 0.1]);
-        translate([1, 9.5, 3.1]) cube([30, 16, 0.1]);
+        translate([3, 10.5, 0.5]) cube([63, 14, 0.1]);
+        translate([2, 9.5, 3.1]) cube([65, 16, 0.1]);
     }
 }
 
-translate([1, 1, 0]) cube([30, 3, 30.5]);
-translate([1, 4, 30]) rotate([0, 90, 0]) cylinder(h=30, r=1, center=false, $fn=3);
-translate([1, 1, 30]) cube([30, 8, 2]);
+difference() {
+    translate([-2, 30, 0]) cube([72, 40, 27]);
+    translate([1, 27, 3]) cube([66, 40, 21]);
+    #translate([23, 28, -2]) cube([20, 80, 30]);
+    #translate([-10, 47, -2]) cube([20, 40, 30]);
+    #translate([57, 47, -2]) cube([20, 40, 30]);
+}
 
-translate([1, 73, 0]) cube([30, 3, 30.5]);
-translate([1, 73, 30]) rotate([0, 90, 0]) cylinder(h=30, r=1, center=false, $fn=3);
-translate([1, 68, 30]) cube([30, 8, 2]);
+*translate([1, 1, 0]) cube([30, 3, 30.5]);
+*translate([1, 4, 30]) rotate([0, 90, 0]) cylinder(h=30, r=1, center=false, $fn=3);
+*translate([1, 1, 30]) cube([30, 8, 2]);
 
-translate([28, 35, 0]) cube([60, 25, 3]);
-translate([88, 35, -10]) cube([3, 25, 20]);
+*translate([1, 73, 0]) cube([30, 3, 30.5]);
+*translate([1, 73, 30]) rotate([0, 90, 0]) cylinder(h=30, r=1, center=false, $fn=3);
+*translate([1, 68, 30]) cube([30, 8, 2]);
+
+*translate([28, 35, 0]) cube([60, 25, 3]);
+*translate([88, 35, -10]) cube([3, 25, 20]);
 
 // base block
 //staple_base(base_T,base_W,base_H,default_S,default_T);

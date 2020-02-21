@@ -20,14 +20,14 @@ bladehuckR=0;
 //     translate([-5, -5, 10]) cube([30, 30, 500]);
 // }
 
-*difference(){
+difference(){
     union() {
         translate([7.2, 0, 0]) cube([5.8, 3, 12]);
         hull() {
             translate([5, 2, 0]) cube([10, 1.5, 12]);
             translate([7.4, 5.5, 0]) cube([5.3, 0.1, 12]);
         }
-        translate([10.12, 0, 6]) rotate([90, 0, 0]) cylinder(h=10, r=3.6, center=false);
+        #translate([10.12, 0, 6]) rotate([90, 0, 0]) cylinder(h=10, r=3.6, center=false);
     }
     // translate([10, 8, 5]) rotate([90, 0, 0]) cylinder(h=10, r=2, center=false);
     // translate([10, 8, 15]) rotate([90, 0, 0]) cylinder(h=10, r=2, center=false);
@@ -39,7 +39,7 @@ bladehuckR=0;
 }
 
 
-union() {
+*union() {
     hull() {
         translate([2.8, -3.9, 12]) cube([5, 1.8, 0.1]);
         translate([2.8, -3.9, 0]) cube([5, 2.1, 0.1]);
