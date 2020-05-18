@@ -1,0 +1,74 @@
+esphome:
+  name: espcam01
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  ssid: "YOUR_WIFI_SSID"
+  password: "YOUR_WIFI_PASSWORD"
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+esp32_camera:
+  name: espcam01 
+  external_clock:
+    pin: GPIO32
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO13
+    scl: GPIO12
+  data_pins: [GPIO5, GPIO14, GPIO4, GPIO15, GPIO18, GPIO23, GPIO36, GPIO39]
+  vsync_pin: GPIO27
+  href_pin: GPIO25
+  pixel_clock_pin: GPIO19
+  resolution: SXGA
+  jpeg_quality: 10
+  vertical_flip: true
+  horizontal_mirror: true
+
+binary_sensor:
+  - platform: gpio
+    id: espcam01_pir
+    name: "espcam01_pir"
+    pin:
+      number: 33
+  - platform: gpio
+    name: "espcam01_button"
+    pin:
+      number: 34
+      inverted: True
+
+i2c:
+  sda: 21
+  scl: 22
+  scan: True
+
+sensor:
+  - platform: bme280
+    temperature:
+      name: "espcam01_temperature"
+      oversampling: 16x
+    pressure:
+      name: "espcam01_pressure"
+    humidity:
+      name: "espcam01_humidity"
+
+font:
+  - file: "PressStart2P-Regular.ttf"
+    id: start2p
+    size: 16
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    rotation: 180
+    update_interval: 1s
+    lambda: |-
+      it.printf(0, 32, id(start2p), "%s", id(espcam01_pir).state ? "   :-)" : "");
+
